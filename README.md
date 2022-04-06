@@ -96,12 +96,10 @@ automl_config = AutoMLConfig(
                             )
 ```
 
-_task='classification'_ defines the experiment type which in this case is classification.
+* task='classification' defines the experiment type which in this case is classification.
+* primary_metric='accuracy', accuracy as the primary metric, which is the classical metric to use for a classfication task, although not the only one (AUC, precision, recall, F1-score, etc.).
+* n_cross_validations=5 sets how many cross validations to perform, based on the same number of folds (number of subsets), we chose 5 folds for cross-validation. The metrics are calculated with the average of the 5 validation metrics.
 
-_primary_metric='accuracy', accuracy as the primary metric, which is the classical metric to use for a classfication task, although not the only one (AUC, precision, recall, F1-score, etc.).
-
-
-_n_cross_validations=5_ sets how many cross validations to perform, based on the same number of folds (number of subsets). As one cross-validation could result in overfit, we chose 5 folds for cross-validation; thus the metrics are calculated with the average of the 5 validation metrics.
 
 ***
 ## Pipeline comparison
@@ -127,15 +125,12 @@ The difference in accuracy between the two models is not breathtaking and althou
 **What are some areas of improvement for future experiments? Why might these improvements help the model?**
 
 
-Our data is **highly imbalanced**.
+Our data is **imbalanced**.
 
-Class imbalance is a very common issue in classification problems in machine learning. Imbalanced data negatively impact the model's accuracy because it is easy for the model to be very accurate just by predicting the majority class, while the accuracy for the minority class can fail miserably. This means that taking into account a simple metric like **accuracy** in order to judge how good our model is can be misleading.
+Class imbalance is a very common issue in classification problems in machine learning.
 
-There are many ways to deal with imbalanced data. These include using:
+To deal with imbalanced datas we can use:
 1. A different metric; for example, AUC_weighted which is more fit for imbalanced data
-2. A different algorithm
-3. Random Under-Sampling of majority class
-4. Random Over-Sampling of minority class
-5. Generate synthetic datas from the imbalanced classe, with algortihm like [SMOTE](https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html), or even neural generative neural networks like Variational Auto-Encoder or Generative Adversarial Networks.
-6. Using neural networks, we could use the [Focal loss](https://arxiv.org/abs/1708.02002), which is a loss specialized for imbalanced datasets.
+2. Generate synthetic datas from the imbalanced classe, with algortihm like [SMOTE](https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html), or even neural generative neural networks like Variational Auto-Encoder or Generative Adversarial Networks.
+3. Using neural networks, we could use the [Focal loss](https://arxiv.org/abs/1708.02002), which is a loss specialized for imbalanced datasets.
 
