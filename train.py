@@ -54,18 +54,22 @@ def main():
     # TODO: Create TabularDataset using TabularDatasetFactory
     # Data is located at:
     # "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
+    csv_url= "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
 
-    ds = ### YOUR CODE HERE ###
-    
+    ds = TabularDatasetFactory.from_delimited_files(path=csv_url)
+
     x, y = clean_data(ds)
 
     # TODO: Split data into train and test sets.
 
-    ### YOUR CODE HERE ###a
-
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=223)
+    
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
     accuracy = model.score(x_test, y_test)
+    #add model saving to retrieve it when doing hp tuning.
+    os.makedirs('outputs', exist_ok=True)
+    joblib.dump(model, f'outputs/model_{args.C}_{args.max_iter}.joblib')
     run.log("Accuracy", np.float(accuracy))
 
 if __name__ == '__main__':
