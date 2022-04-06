@@ -46,9 +46,9 @@ evaluation_interval: This is optional and represents the frequency for applying 
 
 slack_factor: The amount of slack allowed with respect to the best performing training run. This factor specifies the slack as a ratio.
 
-Any run that doesn't fall within the slack factor or slack amount of the evaluation metric with respect to the best performing run will be terminated. This means that with this policy, the best performing runs will execute until they finish and this is the reason I chose it.
+Any run that doesn't fall within the slack factor or slack amount of the evaluation metric with respect to the best performing run will be terminated.
 
-full configuration
+Full configuration.
 
 
 ```python
@@ -80,7 +80,7 @@ hyperdrive_config = HyperDriveConfig(run_config=src,
 
 ## AutoML
 
-I defined the following configuration for the AutoML run:
+The configuration for the AutoML run is the following:
 
 ```python
 automl_config = AutoMLConfig(
@@ -96,12 +96,12 @@ automl_config = AutoMLConfig(
                             )
 ```
 
-_task='classification'_, this defines the experiment type which in this case is classification.
+_task='classification'_ defines the experiment type which in this case is classification.
 
-_primary_metric='accuracy'_, I chose accuracy as the primary metric, whihc is the classical metric to use for a classfication task, although not the only one (AUC, precision, recall, F1-score, etc.)
+_primary_metric='accuracy', accuracy as the primary metric, which is the classical metric to use for a classfication task, although not the only one (AUC, precision, recall, F1-score, etc.).
 
 
-_n_cross_validations=5_, this parameter sets how many cross validations to perform, based on the same number of folds (number of subsets). As one cross-validation could result in overfit, we chose 5 folds for cross-validation; thus the metrics are calculated with the average of the 5 validation metrics.
+_n_cross_validations=5_ sets how many cross validations to perform, based on the same number of folds (number of subsets). As one cross-validation could result in overfit, we chose 5 folds for cross-validation; thus the metrics are calculated with the average of the 5 validation metrics.
 
 ***
 ## Pipeline comparison
@@ -139,4 +139,3 @@ There are many ways to deal with imbalanced data. These include using:
 5. Generate synthetic datas from the imbalanced classe, with algortihm like [SMOTE](https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html), or even neural generative neural networks like Variational Auto-Encoder or Generative Adversarial Networks.
 6. Using neural networks, we could use the [Focal loss](https://arxiv.org/abs/1708.02002), which is a loss specialized for imbalanced datasets.
 
-Concluding, the high data imbalance is something that can be handled in a future execution, leading to an obvious improvement of the model.
