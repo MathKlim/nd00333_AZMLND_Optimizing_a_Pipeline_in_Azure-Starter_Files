@@ -42,6 +42,8 @@ An early stopping policy is used to automatically terminate poorly performing ru
 
 `policy = BanditPolicy(evaluation_interval=1, slack_factor=0.2, slack_amount=None, delay_evaluation=0)`
 
+see [Azure doc](https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.banditpolicy?view=azure-ml-py#remarks) for more details.
+
 evaluation_interval: This is optional and represents the frequency for applying the policy. Each time the training script logs the primary metric counts as one interval.
 
 slack_factor: The amount of slack allowed with respect to the best performing training run. This factor specifies the slack as a ratio.
